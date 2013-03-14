@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE project>
+<project name="ShutDown Timer" default="build" basedir="">
+    
+	<property name="src.dir" location="${basedir}/src"/>
+	<property name="bin.dir" location="${basedir}/bin"/>
+	
+	<target name="compile">
+		<javac srcdir="${src.dir}"
+         destdir="${bin.dir}"/>
+	</target>
+	
+	<target name="clean">
+		<delete dir="{bin.dir}"/>
+		<delete file="{basedir}/{ant.project.name}.jar"/>
+	</target>
+	
+	<target name="build-jar">
+		<jar destfile="${basedir}/${ant.project.name}.jar" basedir="${bin.dir}">
+			<manifest>
+			  <attribute name="Main-Class"
+					value="org.livon.sdtimer.SDTimer"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="build" depends="clean, compile, build-jar"/>
+</project>
