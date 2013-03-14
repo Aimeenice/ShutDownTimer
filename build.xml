@@ -1,22 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE project>
-<project name="ShutDown Timer" default="build" basedir="">
+<project name="ShutDownTimer" default="build" basedir="">
     
 	<property name="src.dir" location="${basedir}/src"/>
-	<property name="bin.dir" location="${basedir}/bin"/>
+	<property name="build.dir" location="${basedir}/build"/>
+	<property name="build.dir.classes" location="${build.dir}/classes"/>
 	
 	<target name="compile">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${build.dir.classes}"/>
 		<javac srcdir="${src.dir}"
-         destdir="${bin.dir}"/>
+         destdir="${build.dir.classes}"/>
 	</target>
 	
 	<target name="clean">
-		<delete dir="{bin.dir}"/>
-		<delete file="{basedir}/{ant.project.name}.jar"/>
+		<delete dir="{build.dir}"/>
 	</target>
 	
 	<target name="build-jar">
-		<jar destfile="${basedir}/${ant.project.name}.jar" basedir="${bin.dir}">
+		<jar destfile="${build.dir}/${ant.project.name}.jar" basedir="${build.dir.classes}">
 			<manifest>
 			  <attribute name="Main-Class"
 					value="org.livon.sdtimer.SDTimer"/>
